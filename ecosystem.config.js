@@ -7,7 +7,7 @@ module.exports = {
     instance_var: 'INSTANCE_ID',
     env: {
       NODE_ENV: 'production',
-      PORT: 3333
+      PORT: 5500
     },
   }]
 }
