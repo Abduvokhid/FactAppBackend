@@ -1,0 +1,30 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link <%= path === '/' ? 'active' : '' %>" href="/">
+                    <i data-feather="home"></i>
+                    Bosh sahifa
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= path === '/facts' ? 'active' : '' %>" href="/facts">
+                    <i data-feather="file"></i>
+                    Faktlar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= path === '/categories' ? 'active' : '' %>" href="/categories">
+                    <i data-feather="layers"></i>
+                    Kategoriyalar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%= path === '/statistics' ? 'active' : '' %>" href="#">
+                    <i data-feather="bar-chart-2"></i>
+                    Statistika
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

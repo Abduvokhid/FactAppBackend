@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #563d7c;
+      }
+
+      .cls-2 {
+        font-size: 41.667px;
+        fill: #fff;
+        font-family: Arial;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <rect id="Rounded_Rectangle_1" class="cls-1" x="1" y="1" width="70" height="70" rx="10" ry="10"/>
+  <text id="F" class="cls-2" x="23.518" y="51.845">F</text>
+</svg>
