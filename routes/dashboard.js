@@ -23,6 +23,11 @@ router.post('/login', async (req, res) => {
   res.redirect('/')
 })
 
+router.post('/logout', checkPermission(), async (req, res) => {
+  await req.session.destroy()
+  res.redirect('/login')
+})
+
 router.get('/', checkPermission(), (req, res) => {
   res.render('dashboard/index')
 })

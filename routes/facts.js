@@ -1,9 +1,10 @@
 const express = require('express')
 const factDAL = require('../DAL/fact')
 const categoryDAL = require('../DAL/category')
+const checkPermission = require('../middlewares/checkPermission')
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', checkPermission(), async (req, res) => {
   const facts = await factDAL.findAllFacts()
   const categories = await categoryDAL.getAllCategories()
   const error = req.cookies.error
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
   res.render('facts/index', { facts, categories, error })
 })
 
-router.post('/add', async (req, res) => {
+router.post('/add', checkPermission(), async (req, res) => {
   const { fact_text, fact_category } = req.body
   const category = await categoryDAL.getCategoryByID(fact_category)
   if (!category) {
@@ -22,7 +23,7 @@ router.post('/add', async (req, res) => {
   res.redirect('/facts')
 })
 
-router.post('/delete/:id', async (req, res) => {
+router.post('/delete/:id', checkPermission(), async (req, res) => {
   await factDAL.deleteFact(req.params.id)
   res.redirect('/facts')
 })

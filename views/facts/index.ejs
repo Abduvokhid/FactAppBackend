@@ -66,7 +66,7 @@
                 <% for (let fact of facts) { %>
                     <tr>
                         <td class="align-middle pl-2"><%= fact.category.name %></td>
-                        <td class="align-middle"><%= fact.text %></td>
+                        <td class="align-middle"><%= fact.text.replace(/(^\s*(?!.+)\n+)|(\n+\s+(?!.+)$)/g, ' ').slice(0, 120).trim() %></td>
                         <td class="align-middle"><%= fact.created_date.toLocaleString() %></td>
                         <td class="align-middle pr-2">
                             <form action="/facts/delete/<%= fact._id %>" method="post">
