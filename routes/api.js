@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.get('/facts', async (req, res) => {
   let { last_access } = req.query
-  if (last_access) last_access = new Date(parseInt(last_access))
+  if (last_access) last_access = new Date(parseInt(last_access) - 18000000)
   const facts = last_access ? await factsDAL.findFactsAfterDate(last_access) : await factsDAL.findAllFacts()
   for (const fact of facts) {
     fact._id = undefined
