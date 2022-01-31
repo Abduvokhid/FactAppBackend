@@ -1,26 +1,27 @@
-const Fact = require('../models/Fact')
+const { DataTypes } = require('sequelize')
 
-module.exports.findAllFacts = () => {
-  return Fact.find().populate('category').sort('created_date').lean()
-}
-
-module.exports.findFactsAfterDate = (date) => {
-  return Fact.find({ created_date: { $gt: date } }).populate('category').sort('created_date').lean()
-}
-
-module.exports.findFactByCategoryID = (category_id) => {
-  return Fact.find({ category: category_id }).lean()
-}
-
-module.exports.createFact = async (text, category) => {
-  const fact = new Fact({
-    text: text,
-    category: category
-  })
-  await fact.save()
-  return fact
-}
-
-module.exports.deleteFact = async (id) => {
-  await Fact.findByIdAndDelete(id)
-}
+module.exports = (sequelize) => sequelize.define('fact', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  photo: {
+    type: DataTypes.STRING,
+  },
+  created_date: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  }
+}, {
+  timestamps: false
+})

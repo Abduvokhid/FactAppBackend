@@ -1,9 +1,31 @@
-const User = require('../models/User')
+const { DataTypes } = require('sequelize')
 
-module.exports.getUserByID = (id) => {
-  return User.findById(id).lean()
-}
-
-module.exports.getUserByEmail = (email) => {
-  return User.findOne({ email: email })
-}
+module.exports = (sequelize) => sequelize.define('user', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  name: {
+    type: DataTypes.STRING
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  last_access_date: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
+  },
+  created_date: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
+  }
+}, {
+  timestamps: false
+})

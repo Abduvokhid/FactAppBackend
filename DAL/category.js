@@ -1,21 +1,23 @@
-const Category = require('../models/Category')
+const { DataTypes } = require('sequelize')
 
-module.exports.getAllCategories = () => {
-  return Category.find({}).lean()
-}
-
-module.exports.getCategoryByID = (id) => {
-  return Category.findById(id).lean()
-}
-
-module.exports.createCategory = async (name) => {
-  const category = new Category({
-    name: name
-  })
-  await category.save()
-  return category
-}
-
-module.exports.deleteCategory = async (id) => {
-  await Category.findByIdAndDelete(id)
-}
+module.exports = (sequelize) => sequelize.define('category', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  photo: {
+    type: DataTypes.STRING,
+  },
+  created_date: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  }
+}, {
+  timestamps: false
+})
