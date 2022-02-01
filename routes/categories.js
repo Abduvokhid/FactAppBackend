@@ -4,7 +4,9 @@ const checkPermission = require('../middlewares/checkPermission')
 const router = express.Router()
 
 router.get('/', checkPermission(), async (req, res) => {
-  const categories = await Category.findAll()
+  const categories = await Category.findAll({
+    include: [{ model: Fact, through: { attributes: [] }, attributes: ['id'] }]
+  })
   const error = req.cookies.error
   res.clearCookie('error', { maxAge: 0 })
   res.render('categories/index', { categories, error })

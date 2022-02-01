@@ -1,13 +1,11 @@
 const express = require('express')
 const { User, Category, FactCategory, Fact } = require('../DAL')
+const { Op } = require('sequelize')
 const router = express.Router()
 
 router.get('/test', async (req, res) => {
-  const data = await Fact.findAll({
-    include: [{
-      model: Category, through: FactCategory
-    }]
-  })
+  const d = ['732648539233026049', '732648557113442305']
+  const data = await Category.findAll({ where: { id: { [Op.in]: d } }, attributes: ['id'] })
   res.json(data)
 })
 

@@ -44,7 +44,7 @@
             <thead>
             <tr>
                 <th class="pl-2">Kategoriya nomi</th>
-                <th>Qo'shilgan sana</th>
+                <th>Faktlar soni</th>
                 <th class="pr-2">&nbsp;</th>
             </tr>
             </thead>
@@ -53,7 +53,7 @@
                 <% for (let category of categories) { %>
                     <tr>
                         <td class="align-middle pl-2"><%= category.name %></td>
-                        <td class="align-middle"><%= category.created_date.toLocaleString() %></td>
+                        <td class="align-middle"><%= category.facts.length %></td>
                         <td class="align-middle pr-2">
                             <form action="/categories/delete/<%= category.id %>" method="post">
                                 <button type="submit" class="btn btn-sm btn-danger">O'chirish</button>
