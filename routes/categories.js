@@ -24,7 +24,7 @@ router.post('/delete/:id', checkPermission(), async (req, res) => {
     res.cookie('error', 'Ushbu kategoriyaga ulangan faktlar bor. Avval ularni o\'chiring yoki kategoriyasini o\'zgartiring')
     return res.redirect('/categories')
   }
-  await Category.destroy(req.params.id)
+  await Category.destroy({ where: { id: req.params.id } })
   res.redirect('/categories')
 })
 
