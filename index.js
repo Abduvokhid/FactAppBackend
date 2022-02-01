@@ -1,6 +1,5 @@
 require('dotenv').config()
 require('express-async-errors')
-require('./utils/prototypes')
 
 const app = require('express')()
 const db = require('./DAL')
