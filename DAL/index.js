@@ -11,20 +11,28 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.user = require('./user')(sequelize)
-db.session = require('./session')(sequelize)
-db.category = require('./category')(sequelize)
-db.fact = require('./fact')(sequelize)
+db.User = require('./user')(sequelize)
+db.Session = require('./session')(sequelize)
+db.Category = require('./category')(sequelize)
+db.Fact = require('./fact')(sequelize)
+db.FactCategory = require('./fact_category')(sequelize)
 
-db.session.belongsTo(db.user, {
+db.Session.belongsTo(db.User, {
   as: 'user',
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 })
 
-db.fact.belongsToMany(db.category, {
-  through: 'facts_categories',
-  constraints: false,
+db.Fact.belongsToMany(db.Category, {
+  through: db.FactCategory,
+  foreignKey: 'fact_id',
+  timestamps: false
+})
+
+db.Category.belongsToMany(db.Fact, {
+  through: db.FactCategory,
+  foreignKey: 'category_id',
+  timestamps: false
 })
 
 module.exports = db

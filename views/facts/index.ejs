@@ -18,7 +18,7 @@
                             <label for="fact_category" class="col-form-label">Fakt matni:</label>
                             <select name="fact_category" id="fact_category" class="form-control" required>
                                 <% for (let category of categories) { %>
-                                    <option value="<%= category._id %>"><%= category.name %></option>
+                                    <option value="<%= category.id %>"><%= category.name %></option>
                                 <% } %>
                             </select>
                         </div>
@@ -65,11 +65,15 @@
             <% if (facts.length > 0) { %>
                 <% for (let fact of facts) { %>
                     <tr>
-                        <td class="align-middle pl-2"><%= fact.category.name %></td>
-                        <td class="align-middle"><%= fact.text.replace(/(^\s*(?!.+)\n+)|(\n+\s+(?!.+)$)/g, ' ').slice(0, 120).trim() %></td>
+                        <td class="align-middle pl-2">
+                            <% for (let category of fact.categories) { %>
+                                <%= category.name %> |
+                            <% } %>
+                        </td>
+                        <td class="align-middle"><%= fact.title.replace(/(^\s*(?!.+)\n+)|(\n+\s+(?!.+)$)/g, ' ').slice(0, 120).trim() %></td>
                         <td class="align-middle"><%= fact.created_date.toLocaleString() %></td>
                         <td class="align-middle pr-2">
-                            <form action="/facts/delete/<%= fact._id %>" method="post">
+                            <form action="/facts/delete/<%= fact.id %>" method="post">
                                 <button type="submit" class="btn btn-sm btn-danger">O'chirish</button>
                             </form>
                         </td>

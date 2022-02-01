@@ -1,17 +1,18 @@
-const { getUserByID } = require('../DAL/user')
+const { Session } = require('../DAL')
 
 module.exports = async (req, res, next) => {
-  if (req.session === undefined || req.session.user === undefined) return next()
+  const sid = req.cookies.sid
+  if (!sid) return next()
 
-  const user_id = req.session.user
-  const user = await getUserByID(user_id)
-  if (!user) {
-    delete req.session.user
-    return next()
-  }
+  const session = await Session.findOne({ include: 'user', where: { sid: sid } })
+  if (!session) return next()
+  if (!session.user) return next()
 
-  req.user = user
-  req.app.locals.user = user
+  req.session = session
+  req.user = session.user
+  res.locals.user = session.user
+
+  req.session.user_agent = req.get('User-Agent')
 
   next()
 }

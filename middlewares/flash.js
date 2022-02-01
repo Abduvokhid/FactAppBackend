@@ -1,23 +1,14 @@
-module.exports = () => (req, res, next) => {
-  if (req.session === undefined) throw Error('req.flash() requires sessions')
-  const messages = req.session.flash = req.session.flash || {}
+module.exports = (req, res, next) => {
 
-  req.flash = async (type, msg) => {
-    messages[type] = msg
-    await req.session.save()
+  req.setFlash = (type, message) => {
+    res.cookie(type, message)
   }
 
-  req.getFlash = async (type) => {
-    if (!type) {
-      req.session.flash = {}
-      await req.session.save()
-      return messages
-    }
-
-    const msg = messages[type]
-    delete messages[type]
-    await req.session.save()
-    return msg
+  req.getFlash = (type) => {
+    const message = req.cookies[type]
+    res.cookie(type, '', { maxAge: 0 })
+    return message
   }
+
   next()
 }

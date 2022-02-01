@@ -1,5 +1,20 @@
 const express = require('express')
+const { User, Category, FactCategory, Fact } = require('../DAL')
 const router = express.Router()
+
+router.get('/test', async (req, res) => {
+  const data = await Fact.findAll({
+    include: [{
+      model: Category, through: FactCategory
+    }]
+  })
+  res.json(data)
+})
+
+router.get('/test/:id', async (req, res) => {
+  const data = await FactCategory.findAndCountAll({ where: { category_id: req.params.id } })
+  res.json(data)
+})
 
 router.use('/', require('./dashboard'))
 router.use('/api', require('./api'))
