@@ -1,19 +1,21 @@
 const express = require('express')
-const { Fact } = require('../DAL')
+const { Fact, Category } = require('../DAL')
 const { Op } = require('sequelize')
 const router = express.Router()
 
 router.get('/facts', async (req, res) => {
   let { last_id } = req.query
-  if (last_id) last_id = new Date(parseInt(last_id))
-  const facts = last_id ? await Fact.findAll({ where: { id: { [Op.gt]: last_id } } }) : await Fact.findAll()
-  for (const fact of facts) {
-    fact.id = undefined
-    fact.created_date = undefined
-    fact.category = fact.category.name
-  }
+  const { rows: facts, count } = last_id ? await Fact.findAndCountAll({ where: { id: { [Op.gt]: last_id } } }) : await Fact.findAndCountAll({
+    attributes: { exclude: ['created_date'] },
+    include: {
+      model: Category,
+      through: { attributes: [] },
+      attributes: { exclude: ['created_date'] },
+    },
+    distinct: true
+  })
   res.json({
-    count: facts.length,
+    count: count,
     result: facts
   })
 })
