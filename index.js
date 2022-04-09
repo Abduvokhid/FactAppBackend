@@ -27,7 +27,7 @@ process.on('unhandledRejection', (reason) => {
 const PORT = process.env.PORT || 5000
 app.listen(PORT, async () => {
   console.log(`Server started on port ${PORT}`)
-  db.sequelize.sync().then(() => {
+  db.sequelize.authenticate().then(() => {
     console.log('Database has been connected')
   })
 })

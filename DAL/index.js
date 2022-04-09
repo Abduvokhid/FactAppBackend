@@ -1,9 +1,12 @@
 const { Sequelize } = require('sequelize')
-const sequelize = new Sequelize(process.env.DB_URI, {
-  dialect: 'postgres',
+const associate = require('./associations')
+
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: 'mysql',
   charset: 'utf8',
   collate: 'utf8_general_ci',
-  logging: false
+  logging: true
 })
 
 const db = {}
@@ -11,28 +14,11 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.User = require('./user')(sequelize)
-db.Session = require('./session')(sequelize)
-db.Category = require('./category')(sequelize)
-db.Fact = require('./fact')(sequelize)
-db.FactCategory = require('./fact_category')(sequelize)
+db.User = require('./models/User')(sequelize)
+db.Category = require('./models/Category')(sequelize)
+db.Fact = require('./models/Fact')(sequelize)
+db.FactCategory = require('./models/FactCategory')(sequelize)
 
-db.Session.belongsTo(db.User, {
-  as: 'user',
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-})
-
-db.Fact.belongsToMany(db.Category, {
-  through: db.FactCategory,
-  foreignKey: 'fact_id',
-  timestamps: false
-})
-
-db.Category.belongsToMany(db.Fact, {
-  through: db.FactCategory,
-  foreignKey: 'category_id',
-  timestamps: false
-})
+associate(db)
 
 module.exports = db

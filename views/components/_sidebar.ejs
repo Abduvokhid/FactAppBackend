@@ -2,25 +2,25 @@
     <div class="sidebar-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link <%= path === '/' ? 'active' : '' %>" href="/">
+                <a class="nav-link <%= path === '/admin' ? 'active' : '' %>" href="/admin">
                     <i data-feather="home"></i>
                     Bosh sahifa
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%= path === '/facts' ? 'active' : '' %>" href="/facts">
+                <a class="nav-link <%= path === '/admin/facts' ? 'active' : '' %>" href="/admin/facts">
                     <i data-feather="file"></i>
                     Faktlar
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%= path === '/categories' ? 'active' : '' %>" href="/categories">
+                <a class="nav-link <%= path === '/admin/categories' ? 'active' : '' %>" href="/admin/categories">
                     <i data-feather="layers"></i>
                     Kategoriyalar
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%= path === '/statistics' ? 'active' : '' %>" href="#">
+                <a class="nav-link <%= path === '/admin/statistics' ? 'active' : '' %>" href="#">
                     <i data-feather="bar-chart-2"></i>
                     Statistika
                 </a>

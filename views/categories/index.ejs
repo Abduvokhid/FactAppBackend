@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addCategoryForm" action="/categories/add" method="post">
+                <form id="addCategoryForm" action="/admin/categories/add" method="post">
                     <div class="form-group">
                         <label for="category_name" class="col-form-label">Kategoriya nomi:</label>
                         <input type="text" class="form-control" id="category_name" name="category_name" required>
@@ -44,7 +44,6 @@
             <thead>
             <tr>
                 <th class="pl-2">Kategoriya nomi</th>
-                <th>Qo'shilgan sana</th>
                 <th class="pr-2">&nbsp;</th>
             </tr>
             </thead>
@@ -53,9 +52,8 @@
                 <% for (let category of categories) { %>
                     <tr>
                         <td class="align-middle pl-2"><%= category.name %></td>
-                        <td class="align-middle"><%= category.created_date.toLocaleString() %></td>
                         <td class="align-middle pr-2">
-                            <form action="/categories/delete/<%= category.id %>" method="post">
+                            <form action="/admin/categories/delete/<%= category.id %>" method="post">
                                 <button type="submit" class="btn btn-sm btn-danger">O'chirish</button>
                             </form>
                         </td>

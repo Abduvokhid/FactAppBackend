@@ -9,14 +9,18 @@
             </div>
             <% if (categories.length > 0) { %>
                 <div class="modal-body">
-                    <form id="addCategoryForm" action="/facts/add" method="post">
+                    <form id="addCategoryForm" action="/admin/facts/add" method="post">
+                        <div class="form-group">
+                            <label for="fact_title" class="col-form-label">Fakt sarlavhasi:</label>
+                            <input class="form-control" id="fact_title" name="fact_title"/>
+                        </div>
                         <div class="form-group">
                             <label for="fact_text" class="col-form-label">Fakt matni:</label>
                             <textarea class="form-control" id="fact_text" name="fact_text" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="fact_category" class="col-form-label">Fakt matni:</label>
-                            <select name="fact_category" id="fact_category" class="form-control" required>
+                            <select multiple name="fact_category" id="fact_category" class="form-control" required>
                                 <% for (let category of categories) { %>
                                     <option value="<%= category.id %>"><%= category.name %></option>
                                 <% } %>
@@ -55,9 +59,8 @@
         <table class="table table-striped table-sm">
             <thead>
             <tr>
-                <th class="pl-2">Fakt kategoriyasi</th>
-                <th>Fakt matni</th>
-                <th>Qo'shilgan sana</th>
+                <th class="pl-2">Fakt matni</th>
+                <th>Fakt kategoriyasi</th>
                 <th class="pr-2">&nbsp;</th>
             </tr>
             </thead>
@@ -65,15 +68,14 @@
             <% if (facts.length > 0) { %>
                 <% for (let fact of facts) { %>
                     <tr>
+                        <td class="align-middle"><%= fact.title.replace(/(^\s*(?!.+)\n+)|(\n+\s+(?!.+)$)/g, ' ').slice(0, 120).trim() %></td>
                         <td class="align-middle pl-2">
                             <% for (let category of fact.categories) { %>
-                                <%= category.name %> |
+                                <span class="badge bg-secondary text-light"><%= category.name %></span>
                             <% } %>
                         </td>
-                        <td class="align-middle"><%= fact.title.replace(/(^\s*(?!.+)\n+)|(\n+\s+(?!.+)$)/g, ' ').slice(0, 120).trim() %></td>
-                        <td class="align-middle"><%= fact.created_date.toLocaleString() %></td>
                         <td class="align-middle pr-2">
-                            <form action="/facts/delete/<%= fact.id %>" method="post">
+                            <form action="/admin/facts/delete/<%= fact.id %>" method="post">
                                 <button type="submit" class="btn btn-sm btn-danger">O'chirish</button>
                             </form>
                         </td>

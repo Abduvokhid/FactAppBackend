@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize')
 module.exports = (sequelize) => sequelize.define('fact', {
   id: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
@@ -14,13 +15,6 @@ module.exports = (sequelize) => sequelize.define('fact', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  photo: {
-    type: DataTypes.STRING,
-  },
-  created_date: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  }
 }, {
-  timestamps: false
+  timestamps: false,
 })

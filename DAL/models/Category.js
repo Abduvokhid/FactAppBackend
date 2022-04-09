@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize')
 module.exports = (sequelize) => sequelize.define('category', {
   id: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
@@ -10,13 +11,6 @@ module.exports = (sequelize) => sequelize.define('category', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  photo: {
-    type: DataTypes.STRING,
-  },
-  created_date: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  }
 }, {
-  timestamps: false
+  timestamps: false,
 })

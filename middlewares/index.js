@@ -7,25 +7,31 @@ const authenticate = require('./authenticate')
 
 const router = express.Router()
 
-router.use((req, res, next) => {
-  req.app.set('view engine', 'ejs')
-  req.app.locals.path = req.path
-  res.locals.path = req.path
-  res.locals.nl2br = nl2br
-  next()
-})
+router.use([
+  express.static('public'),
+])
 
-router.use(expressLayouts)
-router.use(express.static('public'))
-router.use(express.urlencoded({ extended: false }))
-router.use(cookieParser(process.env.COOKIE_SECRET))
+router.use('/admin', [
+  (req, res, next) => {
+    req.app.set('view engine', 'ejs')
+    req.app.locals.path = req.path
+    res.locals.path = req.path
+    res.locals.nl2br = nl2br
+    next()
+  },
+  expressLayouts,
+  express.urlencoded({ extended: false }),
+  cookieParser(process.env.COOKIE_SECRET),
+  flash,
+  authenticate,
+])
 
-router.use(flash)
-router.use(authenticate)
-
-// router.use((req, res, next) => {
-//   res.locals.selector = require('../helpers/selector')
-//   next()
-// })
+router.use('/api', [
+  (req, res, next) => {
+    req.app.set('json replacer', (k, v) => (v === null ? undefined : v))
+    next()
+  },
+  express.json(),
+])
 
 module.exports = router
