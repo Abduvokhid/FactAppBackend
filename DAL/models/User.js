@@ -19,6 +19,9 @@ module.exports = (sequelize) => sequelize.define('user', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  session: {
+    type: DataTypes.STRING,
+  },
 }, {
   timestamps: false,
 })

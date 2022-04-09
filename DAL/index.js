@@ -6,7 +6,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   dialect: 'mysql',
   charset: 'utf8',
   collate: 'utf8_general_ci',
-  logging: true
+  logging: false,
 })
 
 const db = {}
