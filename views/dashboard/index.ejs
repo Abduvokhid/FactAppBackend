@@ -8,50 +8,5 @@
         </div>
     <% } %>
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Foydalanuvchilar</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title"><%= data.users.total %> ta</h1>
-                    <ul class="list-unstyled mt-3 mb-2">
-                        <li>Oxirgi 30 kunda: <b><%= data.users.last_month %> ta</b></li>
-                        <li>Oxirgi 7 kunda: <b><%= data.users.last_week %> ta</b></li>
-                        <li>Oxirgi 24 soatda: <b><%= data.users.last_day %> ta</b></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Kategoriyalar</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title"><%= data.categories.total %> ta</h1>
-                    <ul class="list-unstyled mt-3 mb-2">
-                        <li>Oxirgi 30 kunda: <b><%= data.categories.last_month %> ta</b></li>
-                        <li>Oxirgi 7 kunda: <b><%= data.categories.last_week %> ta</b></li>
-                        <li>Oxirgi 24 soatda: <b><%= data.categories.last_day %> ta</b></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Faktlar</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title"><%= data.facts.total %> ta</h1>
-                    <ul class="list-unstyled mt-3 mb-2">
-                        <li>Oxirgi 30 kunda: <b><%= data.facts.last_month %> ta</b></li>
-                        <li>Oxirgi 7 kunda: <b><%= data.facts.last_week %> ta</b></li>
-                        <li>Oxirgi 24 soatda: <b><%= data.facts.last_day %> ta</b></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
 </main>

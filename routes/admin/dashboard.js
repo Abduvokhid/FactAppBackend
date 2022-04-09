@@ -29,7 +29,10 @@ router.post('/login', async (req, res) => {
 })
 
 router.post('/logout', checkPermission(), async (req, res) => {
-  await User.update({ session: null }, { where: { id: user.id } })
+  req.user.session = null
+  await req.user.save()
+  res.cookie('sid', undefined, { maxAge: 1 })
+  // await User.update({ session: null }, { where: { id: req.user.id } })
   res.redirect('/admin/login')
 })
 
