@@ -4,7 +4,7 @@ module.exports = async (req, res, next) => {
   const sid = req.cookies.sid
   if (!sid) return next()
 
-  const user = await User.findOne({ session: sid })
+  const user = await User.findOne({ where: { session: sid } })
   if (!user) return next()
 
   req.user = user

@@ -1,0 +1,38 @@
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Fakt qo'shish</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <button type="submit" form="addFactForm" class="btn btn-sm btn-success">
+                <i data-feather="plus"></i>
+                Qo'shish
+            </button>
+        </div>
+    </div>
+    <% if (typeof error !== 'undefined') { %>
+        <div class="alert alert-sm alert-danger" role="alert">
+            <%= error %>
+        </div>
+    <% } %>
+    <% if (categories.length > 0) { %>
+        <form id="addFactForm" action="/admin/facts/add" method="post">
+            <div class="form-group">
+                <label for="fact_title" class="col-form-label">Fakt sarlavhasi:</label>
+                <input class="form-control" id="fact_title" name="fact_title"/>
+            </div>
+            <div class="form-group">
+                <label for="fact_text" class="col-form-label">Fakt matni:</label>
+                <textarea class="form-control" id="fact_text" name="fact_text" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="fact_category" class="col-form-label">Fakt kategoriyalari:</label>
+                <select multiple name="fact_category" id="fact_category" class="form-control" required>
+                    <% for (let category of categories) { %>
+                        <option value="<%= category.id %>"><%= category.name %></option>
+                    <% } %>
+                </select>
+            </div>
+        </form>
+    <% } else { %>
+        <p class="mx-3 my-2">Fakt qo'shish uchun avval kategoriya qo'shing!</p>
+    <% } %>
+</main>

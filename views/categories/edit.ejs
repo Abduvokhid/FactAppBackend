@@ -1,0 +1,23 @@
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Kategoriyani o'zgartirish - "<%= category.name %>"</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <button type="submit" class="btn btn-sm btn-success" form="editCategoryForm">
+                <i data-feather="plus"></i>
+                Saqlash
+            </button>
+        </div>
+    </div>
+    <% if (typeof error !== 'undefined') { %>
+        <div class="alert alert-sm alert-danger" role="alert">
+            <%= error %>
+        </div>
+    <% } %>
+    <form id="editCategoryForm" action="/admin/categories/edit" method="post">
+        <div class="form-group">
+            <label for="category_name" class="col-form-label">Kategoriya nomi:</label>
+            <input type="text" class="form-control" id="category_name" value="<%= category.name %>" name="category_name" required>
+            <input type="hidden" value="<%= category.id %>" name="category_id" id="category_id">
+        </div>
+    </form>
+</main>
