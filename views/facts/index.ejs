@@ -48,4 +48,34 @@
             </tbody>
         </table>
     </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item <%= (meta.firstPage == meta.currentPage) ? 'disabled' : '' %>">
+                <a class="page-link" href="?page=<%= meta.firstPage %>" aria-label="Previous">
+                    <span aria-hidden="true"><<</span>
+                    <span class="sr-only">Birinchisi</span>
+                </a>
+            </li>
+            <li class="page-item <%= (meta.previousPage == meta.currentPage) ? 'disabled' : '' %>">
+                <a class="page-link" href="?page=<%= meta.previousPage %>" aria-label="Previous">
+                    <span aria-hidden="true"><</span>
+                    <span class="sr-only">Avvalgisi</span>
+                </a>
+            </li>
+            <li class="page-item disabled"><a class="page-link" href="?page=<%= meta.currentPage %>">
+                    <%= `${meta.currentPage} / ${meta.pagesCount}` %></a></li>
+            <li class="page-item <%= (meta.nextPage == meta.currentPage) ? 'disabled' : '' %>">
+                <a class="page-link" href="?page=<%= meta.nextPage %>" aria-label="Next">
+                    <span aria-hidden="true">></span>
+                    <span class="sr-only">Keyingisi</span>
+                </a>
+            </li>
+            <li class="page-item <%= (meta.lastPage == meta.currentPage) ? 'disabled' : '' %>">
+                <a class="page-link" href="?page=<%= meta.lastPage %>" aria-label="Next">
+                    <span aria-hidden="true">>></span>
+                    <span class="sr-only">Oxirgisi</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </main>

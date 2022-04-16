@@ -16,7 +16,7 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body
   const user = await User.findOne({ where: { email: email } })
   if (!user || user.password !== password) {
-    res.setFlash('error', 'Noto\'g\'ri email yoki parol')
+    req.setFlash('error', 'Noto\'g\'ri email yoki parol')
     return res.redirect('/admin/login')
   }
 

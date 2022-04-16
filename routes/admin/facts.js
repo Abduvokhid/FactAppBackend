@@ -8,15 +8,39 @@ router.use([
 ])
 
 router.get('/', async (req, res) => {
-  const facts = await Fact.findAll({
+  const { limit, page } = req.query
+  const l = parseInt(limit) || 50, p = parseInt(page) || 1
+
+  const factsAll = await Fact.findAll({
     include: [{
       model: Category, through: FactCategory
-    }]
+    }],
+    order: [['id', 'ASC']],
   })
-  const categories = await Category.findAll()
+
+  const start = (p - 1) * l
+  const facts = factsAll.slice(start, start + l)
+
+  const meta = {
+    pagesCount: Math.ceil(factsAll.length / l),
+    currentPage: p,
+    previousPage: p,
+    firstPage: p,
+    nextPage: p,
+    lastPage: p,
+  }
+  if (p > 1) {
+    meta.previousPage = p - 1
+    meta.firstPage = 1
+  }
+  if (meta.pagesCount > p) {
+    meta.nextPage = p + 1
+    meta.lastPage = meta.pagesCount
+  }
+
   const error = req.cookies.error
   res.clearCookie('error', { maxAge: 0 })
-  res.render('facts/index', { facts, categories, error })
+  res.render('facts/index', { facts, meta, error })
 })
 
 router.get('/add', async (req, res) => {
